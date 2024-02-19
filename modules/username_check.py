@@ -13,7 +13,7 @@ def check_social_networks(username):
         'GitHub': ('https://www.github.com/{}', 'There isn’t a GitHub Pages site here.'),
         'SoundCloud': ('https://www.soundcloud.com/{}', 'Oops! We can’t find that SoundCloud user.'),
         'Snapchat': ('https://www.snapchat.com/add/{}', 'Sorry! This user has not added any Snaps to their Story yet.'),
-        'TikTok': ('https://www.tiktok.com/@{}', 'Sorry, this page isn’t available.'),
+        'TikTok': ('https://www.tiktok.com/@{}', "Couldn't find this account"),
         'Steam': ('https://www.steamcommunity.com/id/{}', 'The specified profile could not be found.'),
     }
     headers = {

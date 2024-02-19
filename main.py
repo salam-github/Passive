@@ -30,14 +30,13 @@ def handle_fullname(fullname):
     write_result("result", result)
 
 def handle_ip(ip):
-    """Handles IP lookup and output."""
-    isp, city, location = lookup_ip(ip)  # This now correctly receives three values
-    if isp != "Lookup failed":
-        result = f"ISP: {isp}\nCity: {city}\nLocation (Lat/Lon): {location}"
+    isp, city, location = lookup_ip(ip)  # This now correctly handles errors
+    if isp.startswith("Error"):
+        print(isp)  # Prints the error message
     else:
-        result = "IP lookup failed."
-    print(result)
-    write_result("result", result)
+        result = f"ISP: {isp}\nCity: {city}\nLocation (Lat/Lon): {location}"
+        print(result)
+        write_result("result", result)
 
 def handle_username(username):
     """Handles username search across social networks and output."""
@@ -52,7 +51,7 @@ def handle_username(username):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Passive Information Gathering Tool')
+    parser = argparse.ArgumentParser(description='Welcome to passive v1.0.0')
     parser.add_argument('-fn', '--fullname', help='Search with full-name')
     parser.add_argument('-ip', help='Search with IP address')
     parser.add_argument('-u', '--username', help='Search with username')
