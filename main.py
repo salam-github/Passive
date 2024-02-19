@@ -6,7 +6,7 @@ import os
 
 def write_result(filename_prefix, data):
     """Writes data to a file, ensuring unique filenames."""
-    counter = 0
+    counter = 1
     filename = f"{filename_prefix}.txt"
     while os.path.exists(filename):
         filename = f"{filename_prefix}{counter}.txt"

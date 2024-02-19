@@ -6,7 +6,7 @@ def check_social_networks(username):
     networks = {
         'Facebook': ('https://www.facebook.com/{}', 'Sisältö ei ole käytettävissä tällä hetkellä'),  # Example text
         'reddit': ('https://www.reddit.com/user/{}', 'Sorry, nobody on Reddit goes by that name.'),
-        'Twitter': ('https://www.twitter.com/{}', 'This account doesn’t exist'),
+        'Twitter': ('https://twitter.com/{}', 'This account doesn’t exist'),
         'LinkedIn': ('https://www.linkedin.com/in/{}', 'This page doesn’t exist'),
         'Instagram': ('https://www.instagram.com/{}', 'Sorry, this page isn’t available.'),
         'Pinterest': ('https://www.pinterest.com/{}', 'Sorry! We couldn’t find that page.'),
@@ -17,7 +17,7 @@ def check_social_networks(username):
         'Steam': ('https://www.steamcommunity.com/id/{}', 'The specified profile could not be found.'),
     }
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' #user agent to fool the servers(mainly twitter and instagram)
     }
     
     results = {}
