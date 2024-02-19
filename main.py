@@ -30,9 +30,9 @@ def handle_fullname(fullname):
     write_result("result", result)
 
 def handle_ip(ip):
-    isp, city, location = lookup_ip(ip)  # This now correctly handles errors
+    isp, city, location = lookup_ip(ip) 
     if isp.startswith("Error"):
-        print(isp)  # Prints the error message
+        print(isp)  # Print the error message
     else:
         result = f"ISP: {isp}\nCity: {city}\nLocation (Lat/Lon): {location}"
         print(result)
