@@ -23,12 +23,16 @@ def write_result(filename_prefix, data):
     print(f"Saved in {filename}")
 
 def handle_fullname(fullname):
-    """Handles full name search and output."""
-    address, phone_number = search_full_name(fullname)  # Implement this function in fullname.py
-    result = f"First name: {fullname.split()[0]}\nLast name: {fullname.split()[-1]}\nAddress: {address}\nNumber: {phone_number}"
-    print(result)
-    write_result("result", result)
-
+    """Handles full name search and outputs the result, including age."""
+    first_name, last_name, age, address, phone_number = search_full_name(fullname)
+    
+    if not first_name and not last_name:  # Search failed
+        print("Failed to retrieve information for the specified name.")
+    else:
+        result = f"First name: {first_name}\nLast name: {last_name}\nAge: {age if age else 'Age not found'}\nAddress: {address if address else 'Address not found'}\nNumber: {phone_number if phone_number else 'Phone number not found'}"
+        print(result)
+        write_result("result", result)
+        
 def handle_ip(ip):
     isp, city, location = lookup_ip(ip) 
     if isp.startswith("Error"):
