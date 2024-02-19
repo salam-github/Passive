@@ -36,3 +36,5 @@ MANIFEST
 
 # result text files
 result*
+modules/__pycache__/username_check.cpython-311.pyc
+modules/__pycache__/fullname.cpython-311.pyc

@@ -2,7 +2,7 @@
 
 ## Description
 
-Passive is a tool designed for cybersecurity professionals and enthusiasts to perform passive information gathering. It allows users to query full names, IP addresses, and social media usernames to gather relevant information without actively engaging with the target systems or networks.
+Passive is a tool designed for cybersecurity professionals and enthusiasts to perform passive information gathering. It allows users to query full names, IP addresses, and social media usernames to gather relevant information without actively engaging with the target systems or networks. [project description](https://github.com/01-edu/public/tree/master/subjects/cybersecurity/passive)
 
 ## Features
 
