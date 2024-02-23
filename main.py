@@ -58,7 +58,6 @@ def handle_ip(ip):
 
 def handle_username(username):
     print(f"Searching for {username} please wait...")
-    """Handles username search across social networks and output."""
     results = check_social_networks(username)
     for network, (found, url) in results.items():
         # Print formatted result for each network
@@ -71,9 +70,10 @@ def handle_username(username):
 
 def main():
     parser = argparse.ArgumentParser(description='Welcome to passive v1.0.0')
-    parser.add_argument('-fn', '--fullname', help='Search with full-name')
-    parser.add_argument('-ip', help='Search with IP address')
-    parser.add_argument('-u', '--username', help='Search with username')
+
+    parser.add_argument('-fn', '--fullname', metavar='', help='Perform a search using a full name (e.g., "John Doe") and retrieve relevant information.')
+    parser.add_argument('-ip', metavar='', help='Perform a search using an IP address to retrieve geolocation information, including city, ISP, and other details.')
+    parser.add_argument('-u', '--username', metavar='', help='Check the presence of a username across multiple social networks.')
 
     args = parser.parse_args()
 
