@@ -8,7 +8,7 @@ def check_social_networks(username):
         'GitLab': ('https://www.gitlab.com/{}', 'The page you are looking for does not exist.'),
         'Bitbucket': ('https://www.bitbucket.org/{}', 'The requested repository could not be found.'),
         'HackerOne': ('https://www.hackerone.com/{}', 'This page is gone'),
-        'Facebook': ('https://www.facebook.com/{}', 'Sisältö ei ole käytettävissä tällä hetkellä'),  # Example text
+        'Facebook': ('https://www.facebook.com/{}', 'Sisältö ei ole käytettävissä tällä hetkellä'),  # bcs my browser is in finnish
         'reddit': ('https://www.reddit.com/user/{}', 'Sorry, nobody on Reddit goes by that name.'),
         'Twitter': ('https://twitter.com/{}', 'This account doesn’t exist'),
         'LinkedIn': ('https://www.linkedin.com/in/{}', 'This page doesn’t exist'),
@@ -16,7 +16,7 @@ def check_social_networks(username):
         'YouTube': ('https://www.youtube.com/{}', 'This channel does not exist.'),
         'Pinterest': ('https://www.pinterest.com/{}', 'Sorry! We couldn’t find that page.'),
         'SoundCloud': ('https://www.soundcloud.com/{}', 'Oops! We can’t find that SoundCloud user.'),
-        'Snapchat': ('https://www.snapchat.com/add/{}', 'Sorry! This user has not added any Snaps to their Story yet.'),
+        'Snapchat': ('https://www.snapchat.com/add/{}', 'Sorry, This content was not found.'),
         'TikTok': ('https://www.tiktok.com/@{}', "Couldn't find this account"),
         'Steam': ('https://www.steamcommunity.com/id/{}', 'The specified profile could not be found.'),
     }
@@ -28,7 +28,7 @@ def check_social_networks(username):
     for network, (url_template, not_found_text) in networks.items():
         url = url_template.format(username)
         try:
-            # Specify a timeout for the request (e.g., 5 seconds)
+            # Specify a timeout for the request (e.g., 2 seconds for now)
             response = requests.get(url, headers=headers, timeout=2)
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')

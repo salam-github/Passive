@@ -1,42 +1,38 @@
 import requests
 from bs4 import BeautifulSoup  # for parsing HTML
+import re
 
 def search_full_name(fullname):
-    """
-    Fetch details for a given full name from a hypothetical or real web page.
-    This function is structured to parse and return specific pieces of information.
-    """
+    """Searches for a person's full name and returns the results."""
     # Placeholder for the URL, adjust as necessary
-    url = f"https://www.eniro.se/{fullname.replace(' ', '+''')}/personer"
+    url = f"https://radaris.com//p/{fullname.replace(' ', '/''')}"
     print(url)
-    response = requests.get(url)
     response = requests.get(url)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
+        profiles_list = soup.select_one(".profiles-list")
         
-        name_container = soup.find("h2", text=lambda text: fullname in text)
-        if name_container:
-            # Assuming the age is in a <p> immediately following the <h2> or within a close parent/child structure
-            age_container = name_container.find_next_sibling("p", class_="text-base font-normal text-gray-600")
-            age_text = age_container.get_text(strip=True) if age_container else "Age not found"
-            # Extract the numeric part for the age, assuming the age is followed by "år"
-            age = ' '.join(filter(str.isdigit, age_text))
+        if profiles_list:
+            results = []
+            for card in profiles_list.select(".card.teaser-card"):
+                full_name_text = card.select_one(".card-title").get_text(strip=True) if card.select_one(".card-title") else "Name not found"
+                address = card.select_one(".res-in .many-links-item").get_text(strip=True) if card.select_one(".res-in .many-links-item") else "Address not found"
+                phone_number = card.select_one(".teaser-card-item .ph").get_text(strip=True) if card.select_one(".teaser-card-item .ph") else "Phone number not found"
+                age_text = card.select_one(".age-wr").get_text(strip=True) if card.select_one(".age-wr") else "Age not found"
+                
+                # Split the full name to first and last name, handling cases where there may be middle names or initials
+                name_parts = full_name_text.split()
+                first_name = " ".join(name_parts[:-1])
+                last_name = name_parts[-1] if name_parts else ""
+                
+                # Extract age digits only
+                age = age_text if age_text else "Age not found"
+                
+                results.append((first_name, last_name, age, address, phone_number))
+                
+            return results if results else [("No results found.", "", "", "", "")]
         else:
-            age = "Age not found"
-        
-        # Extract address
-        address_container = soup.find("span", class_="flex flex-wrap")
-        address = ' '.join(part.get_text(strip=True) for part in address_container.find_all("p")) if address_container else "Address not found"
-        
-        # Extract phone number
-        phone_link = soup.find("a", href=lambda href: href and "tel:" in href)
-        phone = phone_link.get_text(strip=True) if phone_link else "Phone number not found"
-        
-        return fullname.split()[0], fullname.split()[-1], age, address, phone
+            return [("No profiles found.", "", "", "", "")]
     else:
-        return None, None, "Failed to retrieve information", "", ""
+        return [("Failed to retrieve information due to network or server error.", "", "", "", "")]
 
-    return address, phone_number
-
-
-# https://www.eniro.se/FULLNAME/personer

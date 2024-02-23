@@ -9,6 +9,10 @@ def lookup_ip(ip):
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
 
+                # Check for the 404 error page
+        if soup.find('h1', class_='heading-h1') and '404: Page Not Found' in soup.find('h1', class_='heading-h1').text:
+            return "Invalid IP or page not found", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"
+
         # Geo Table Extraction
         geo_info = {item.find_all("td")[0].text: item.find_all("td")[1].text 
                     for item in soup.select(".geo-table tr")}
@@ -30,9 +34,8 @@ def lookup_ip(ip):
         # Extracting specific details from the Summary section
         company = summary_info.get("Company", "Company information not available")
         asn_type = summary_info.get("ASN type", "ASN type information not available")
-        # Assuming Abuse Contact is no longer needed, but you can add it similarly
         privacy = summary_info.get("Privacy", "Privacy information not available")
 
-        return city, state, country, coordinates, asn_type, privacy, company
+        return city, state, country, coordinates, asn_type, privacy, company, 
     else:
-        return "Lookup failed due to network error", "", "", "", "", ""
+        return "Invalid IP or Lookup Failed", "", "", "", "", ""
