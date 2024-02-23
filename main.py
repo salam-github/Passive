@@ -34,13 +34,14 @@ def handle_fullname(fullname):
         write_result("result", result)
         
 def handle_ip(ip):
-    isp, city, location = lookup_ip(ip) 
-    if isp.startswith("Error"):
-        print(isp)  # Print the error message
+    city, state, country, coordinates, asn_type, privacy, company = lookup_ip(ip)
+    if city.startswith("Lookup failed"):
+        print(city)  # Print the error message
     else:
-        result = f"ISP: {isp}\nCity: {city}\nLocation (Lat/Lon): {location}"
+        result = f"IPS: {company}\nCity: {city}\nState: {state}\nCountry: {country}\nCoordinates Lat/Long: {coordinates}\nASN Type: {asn_type}\nPrivacy: {privacy}"
         print(result)
         write_result("result", result)
+
 
 def handle_username(username):
     """Handles username search across social networks and output."""
