@@ -39,7 +39,7 @@ modules/__pycache__/*
 *.py[cod]
 *.pyc
 *.pyo
-
+/env/
 # result text files
 result*
 

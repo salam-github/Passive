@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup  # for parsing HTML
 
-    
+
 def check_social_networks(username):
     networks = {
         'GitHub': ('https://www.github.com/{}', 'There isn’t a GitHub Pages site here.'),

@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup  # for parsing HTML
-import re
 
 def search_full_name(fullname):
     """Searches for a person's full name and returns the results."""

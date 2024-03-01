@@ -29,7 +29,7 @@ def handle_fullname(fullname):
     if results:
         for result in results:
             first_name, last_name, age, address, phone_number = result
-            if first_name == "No results found." or first_name == "Failed to retrieve information due to network or server error.":
+            if first_name == "No profiles found." or first_name == "Failed to retrieve information due to network or server error.":
                 print(first_name)  # Print the error or no results message
                 break
             else:
